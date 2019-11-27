@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.xuexivue.shop.dao.CustomerMapper">
+  <resultMap id="BaseResultMap" type="xyz.xuexivue.shop.pojo.Customer">
+    <id column="cid" jdbcType="INTEGER" property="cid" />
+    <result column="cname" jdbcType="VARCHAR" property="cname" />
+    <result column="ctelphone" jdbcType="VARCHAR" property="ctelphone" />
+    <result column="csex" jdbcType="VARCHAR" property="csex" />
+    <result column="cbirthday" jdbcType="DATE" property="cbirthday" />
+    <result column="cjifen" jdbcType="DOUBLE" property="cjifen" />
+    <result column="cbalance" jdbcType="DOUBLE" property="cbalance" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    cid, cname, ctelphone, csex, cbirthday, cjifen, cbalance
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from customer
+    where cid = #{cid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from customer
+    where cid = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="xyz.xuexivue.shop.pojo.Customer">
+    insert into customer (cid, cname, ctelphone, 
+      csex, cbirthday, cjifen, 
+      cbalance)
+    values (#{cid,jdbcType=INTEGER}, #{cname,jdbcType=VARCHAR}, #{ctelphone,jdbcType=VARCHAR}, 
+      #{csex,jdbcType=VARCHAR}, #{cbirthday,jdbcType=DATE}, #{cjifen,jdbcType=DOUBLE}, 
+      #{cbalance,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="xyz.xuexivue.shop.pojo.Customer">
+    insert into customer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        cid,
+      </if>
+      <if test="cname != null">
+        cname,
+      </if>
+      <if test="ctelphone != null">
+        ctelphone,
+      </if>
+      <if test="csex != null">
+        csex,
+      </if>
+      <if test="cbirthday != null">
+        cbirthday,
+      </if>
+      <if test="cjifen != null">
+        cjifen,
+      </if>
+      <if test="cbalance != null">
+        cbalance,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cid != null">
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="cname != null">
+        #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctelphone != null">
+        #{ctelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="csex != null">
+        #{csex,jdbcType=VARCHAR},
+      </if>
+      <if test="cbirthday != null">
+        #{cbirthday,jdbcType=DATE},
+      </if>
+      <if test="cjifen != null">
+        #{cjifen,jdbcType=DOUBLE},
+      </if>
+      <if test="cbalance != null">
+        #{cbalance,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="xyz.xuexivue.shop.pojo.Customer">
+    update customer
+    <set>
+      <if test="cname != null">
+        cname = #{cname,jdbcType=VARCHAR},
+      </if>
+      <if test="ctelphone != null">
+        ctelphone = #{ctelphone,jdbcType=VARCHAR},
+      </if>
+      <if test="csex != null">
+        csex = #{csex,jdbcType=VARCHAR},
+      </if>
+      <if test="cbirthday != null">
+        cbirthday = #{cbirthday,jdbcType=DATE},
+      </if>
+      <if test="cjifen != null">
+        cjifen = #{cjifen,jdbcType=DOUBLE},
+      </if>
+      <if test="cbalance != null">
+        cbalance = #{cbalance,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="xyz.xuexivue.shop.pojo.Customer">
+    update customer
+    set cname = #{cname,jdbcType=VARCHAR},
+      ctelphone = #{ctelphone,jdbcType=VARCHAR},
+      csex = #{csex,jdbcType=VARCHAR},
+      cbirthday = #{cbirthday,jdbcType=DATE},
+      cjifen = #{cjifen,jdbcType=DOUBLE},
+      cbalance = #{cbalance,jdbcType=DOUBLE}
+    where cid = #{cid,jdbcType=INTEGER}
+  </update>
+</mapper>
